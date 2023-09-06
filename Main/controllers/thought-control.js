@@ -30,6 +30,32 @@ const thoughtController = {
                         handleError(res, err);
                     }
                 },
+     async createThought(req, res) {
+        try {
+            const dbThoughtData = await Thought.create(req.body);
+
+            const dbUserData = await User.findByIdAndUpdate(
+                req.body.userId,
+                { $push: {
+                    thoughts: dbThoughtData._id
+                }},
+                { new: true }
+            );
+
+            if (!dbUserData) {
+                return res.status(404).json({ 
+                    message: 'Thought created with no user associated with this ID'
+                });
+            }
+
+            res.json({ 
+                message: 'Thoughts created successfully'
+            });
+        } catch (err) {
+            handleError(res, err);
+        }
+     },
+
      
 };
 
