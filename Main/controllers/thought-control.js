@@ -15,12 +15,14 @@ const thoughtController = {
     }
   },
 
-  async getSingleThought(req, res) {
+  async getOneThought(req, res) {
     try {
       const dbThoughtData = await Thought.findById(req.params.thoughtId);
 
       if (!dbThoughtData) {
-        return res.status(404).json({ message: 'No thought associated with this id!' });
+        return res.status(404).json({ 
+            message: 'No thought associated with this id!' 
+        });
       }
 
       res.json(dbThoughtData);
@@ -40,7 +42,8 @@ const thoughtController = {
       );
 
       if (!dbUserData) {
-        return res.status(404).json({ message: 'Thought created but no user associated with this id!' });
+        return res.status(404).json({ 
+            message: 'Thought created but no user associated with this id!' });
       }
 
       res.json({ message: 'Thought created!' });
