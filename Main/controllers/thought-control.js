@@ -1,4 +1,4 @@
-const { Thought, User } = require('../models');
+const { Thoughts, User } = require('../models');
 
 const handleError = (res, err) => {
   console.error(err);
@@ -8,7 +8,7 @@ const handleError = (res, err) => {
 const thoughtController = {
   async getThoughts(req, res) {
     try {
-      const dbThoughtData = await Thought.find().sort({ createdAt: -1 });
+      const dbThoughtData = await Thoughts.find().sort({ createdAt: -1 });
       res.json(dbThoughtData);
     } catch (err) {
       handleError(res, err);
@@ -17,7 +17,7 @@ const thoughtController = {
 
   async getOneThought(req, res) {
     try {
-      const dbThoughtData = await Thought.findById(req.params.thoughtId);
+      const dbThoughtData = await Thoughts.findById(req.params.thoughtId);
 
       if (!dbThoughtData) {
         return res.status(404).json({ 
@@ -33,7 +33,7 @@ const thoughtController = {
 
   async createThought(req, res) {
     try {
-      const dbThoughtData = await Thought.create(req.body);
+      const dbThoughtData = await Thoughts.create(req.body);
 
       const dbUserData = await User.findByIdAndUpdate(
         req.body.userId,
@@ -54,7 +54,7 @@ const thoughtController = {
 
   async updateThought(req, res) {
     try {
-      const dbThoughtData = await Thought.findByIdAndUpdate(
+      const dbThoughtData = await Thoughts.findByIdAndUpdate(
         req.params.thoughtId,
         req.body,
         { new: true, runValidators: true }
@@ -72,7 +72,7 @@ const thoughtController = {
 
   async deleteThought(req, res) {
     try {
-      const dbThoughtData = await Thought.findByIdAndRemove(req.params.thoughtId);
+      const dbThoughtData = await Thoughts.findByIdAndRemove(req.params.thoughtId);
 
       if (!dbThoughtData) {
         return res.status(404).json({ message: 'No thought associated with this id!' });
@@ -96,7 +96,7 @@ const thoughtController = {
 
   async addReaction(req, res) {
     try {
-      const dbThoughtData = await Thought.findByIdAndUpdate(
+      const dbThoughtData = await Thoughts.findByIdAndUpdate(
         req.params.thoughtId,
         { $addToSet: { reactions: req.body } },
         { new: true, runValidators: true }
@@ -114,7 +114,7 @@ const thoughtController = {
 
   async removeReaction(req, res) {
     try {
-      const dbThoughtData = await Thought.findByIdAndUpdate(
+      const dbThoughtData = await Thoughts.findByIdAndUpdate(
         req.params.thoughtId,
         { $pull: { reactions: { reactionId: req.params.reactionId } } },
         { new: true, runValidators: true }

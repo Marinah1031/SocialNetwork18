@@ -1,4 +1,4 @@
-const { User, Thought } = require('../models');
+const { User, Thoughts } = require('../models');
 
 const handleError = (res, err) => {
   console.error(err);
@@ -67,7 +67,7 @@ const userController = {
         return res.status(404).json({ message: 'No user ssociated with this id!' });
       }
 
-      await Thought.deleteMany({ _id: { $in: dbUserData.thoughts } });
+      await Thoughts.deleteMany({ _id: { $in: dbUserData.thoughts } });
       res.json({ message: 'User and associated thoughts deleted!' });
     } catch (err) {
       handleError(res, err);
