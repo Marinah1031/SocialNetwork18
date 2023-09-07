@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const thoughtController = require('../../controllers/thought-controller');
+const thoughtController = require('../../controllers/thought-control');
 
 const router = Router();
 
