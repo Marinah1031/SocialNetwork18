@@ -14,7 +14,7 @@ const userSchema = new Schema(
       unique: true,
       match: [/.+@.+\..+/, 'Invalid email format.'],
     },
-    Thoughtshoughts: [
+    thoughts: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Thoughts',
