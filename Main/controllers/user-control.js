@@ -1,11 +1,12 @@
 const { User, Thoughts } = require('../models');
-
+//error handling
 const handleError = (res, err) => {
   console.error(err);
   res.status(500).json(err);
 };
 
 const userController = {
+    //the .select('-__v') specifies that the field should be excluted from the query results.
   async getUsers(req, res) {
     try {
       const dbUserData = await User.find().select('-__v');
@@ -14,7 +15,7 @@ const userController = {
       handleError(res, err);
     }
   },
-
+//get one user by finding by userId by GET
   async getOneUser(req, res) {
     try {
       const dbUserData = await User.findById(req.params.userId)
@@ -31,7 +32,7 @@ const userController = {
       handleError(res, err);
     }
   },
-
+//creating a new user by using POST
   async createUser(req, res) {
     try {
       const dbUserData = await User.create(req.body);
@@ -41,6 +42,7 @@ const userController = {
     }
   },
 
+  //updating an existing user by PUT request to /api/users/:userid
   async updateUser(req, res) {
     try {
       const dbUserData = await User.findByIdAndUpdate(
@@ -59,6 +61,7 @@ const userController = {
     }
   },
 
+  //deleting an exiting user by DELETE request to /api/users/:userId
   async deleteUser(req, res) {
     try {
       const dbUserData = await User.findByIdAndDelete(req.params.userId);
@@ -74,6 +77,7 @@ const userController = {
     }
   },
 
+  //adding a friend by findbyId and using the user's id to link with another user's id to become friends
   async addFriend(req, res) {
     try {
       const dbUserData = await User.findByIdAndUpdate(
@@ -91,7 +95,7 @@ const userController = {
       handleError(res, err);
     }
   },
-
+//deleting a friend throught DELETE request by using the user id and friend id (which is another userId)
   async removeFriend(req, res) {
     try {
       const dbUserData = await User.findByIdAndUpdate(
