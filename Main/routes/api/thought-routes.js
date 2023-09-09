@@ -5,10 +5,10 @@ const router = Router();
 
 router
 .get('/', thoughtController.getThoughts)
-.get('/:id', thoughtController.getOneThought)
+.get('/:thoughtId', thoughtController.getOneThought)
 .post('/', thoughtController.createThought)
-.put('/:id', thoughtController.updateThought)
-.delete('/:id', thoughtController.deleteThought)
+.put('/:thoughtId', thoughtController.updateThought)
+.delete('/:thoughtId', thoughtController.deleteThought)
 .post('/:thoughtId/reactions', thoughtController.addReaction)
 .delete('/:thoughtId/reactions/:reactionId', thoughtController.removeReaction);
 
