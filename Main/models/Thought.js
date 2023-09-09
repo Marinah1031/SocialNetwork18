@@ -2,8 +2,17 @@ const { Schema, model } = require('mongoose');
 const reactionSchema = require('./Reaction');
 const dateFormat = require('../utils/date-format');
 
-const thoughtSchema = new Schema(
-    {
+
+
+const thoughtSchema = new Schema({
+    _id: {
+      type: String,
+      validate: {
+        validator: (value) => ObjectId.isValid(value),
+        message: 'Invalid ObjectId',
+        }
+    },
+
         thoughtText: {
             type: String,
             required: [true, 'This section cannot be blank'],
