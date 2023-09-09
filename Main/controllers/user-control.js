@@ -64,7 +64,7 @@ const userController = {
       const dbUserData = await User.findByIdAndDelete(req.params.userId);
 
       if (!dbUserData) {
-        return res.status(404).json({ message: 'No user ssociated with this id!' });
+        return res.status(404).json({ message: 'No user associated with this id!' });
       }
 
       await Thoughts.deleteMany({ _id: { $in: dbUserData.thoughts } });
