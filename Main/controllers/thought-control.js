@@ -1,4 +1,4 @@
-const { Thought, User } = require('../models');
+const { Thoughts, User } = require('../models');
 
 const handleError = (res, err) => {
   console.error(err);
@@ -6,9 +6,9 @@ const handleError = (res, err) => {
 };
 
 const thoughtController = {
-  async getThought(req, res) {
+  async getThoughts(req, res) {
     try {
-      const dbThoughtData = await Thought.find().sort({ createdAt: -1 });
+      const dbThoughtData = await Thoughts.find().sort({ createdAt: -1 });
       res.json(dbThoughtData);
     } catch (err) {
       handleError(res, err);
@@ -17,7 +17,7 @@ const thoughtController = {
 
   async getOneThought(req, res) {
     try {
-      const dbThoughtData = await Thought.findById(req.params.thoughtId);
+      const dbThoughtData = await Thoughts.findById(req.params.thoughtId);
 
       if (!dbThoughtData) {
         return res.status(404).json({ 
@@ -33,11 +33,11 @@ const thoughtController = {
 
   async createThought(req, res) {
     try {
-      const dbThoughtData = await Thought.create(req.body);
+      const dbThoughtData = await Thoughts.create(req.body);
 
       const dbUserData = await User.findByIdAndUpdate(
         req.body.userId,
-        { $push: { thought: dbThoughtData._id } },
+        { $push: { thoughts: dbThoughtData._id } },
         { new: true }
       );
 
@@ -54,7 +54,7 @@ const thoughtController = {
 
   async updateThought(req, res) {
     try {
-      const dbThoughtData = await Thought.findByIdAndUpdate(
+      const dbThoughtData = await Thoughts.findByIdAndUpdate(
         req.params.thoughtId,
         req.body,
         { new: true, runValidators: true }
@@ -70,38 +70,28 @@ const thoughtController = {
     }
   },
 
-
   async deleteThought(req, res) {
     try {
-      const dbThoughtData = await Thought.findOneAndRemove({ _id: req.params.thoughtId })
+      const thoughtId = await User.findByIdAndDelete(req.params.userId);
 
-      if (!dbThoughtData) {
-        return res.status(404).json({ message: 'No thought with this id!' });
+      if(!thoughtId) {
+        return res.status(404).json({ message: "no thought associated with this id"});
       }
 
-      // remove thought id from user's `thought` field
-      const dbUserData = User.findOneAndUpdate(
-        { thought: req.params.thoughtId },
-        { $pull: { thought: req.params.thoughtId } },
-        { new: true }
-      );
-
-      if (!dbUserData) {
-        return res.status(404).json({ message: 'Thought created but no user with this id!' });
-      }
-
-      res.json({ message: 'Thought successfully deleted!' });
+      await Thoughts.deleteThought({ _id: {$in: thoughtId.thoughts}});
+      res.json({ 
+        message: "thought was deleted"
+      });
     } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
-  },
+        handleError(res, err);
+      }
+    },
       // Use Promise.all to perform both operations concurrently
 //       const [deletedThought, updatedUser] = await Promise.all([
 //         thoughtId.findByIdAndRemove({ _id: thoughtId }),
 //         User.findByIdAndUpdate(
-//           { thought: thoughtId },
-//           { $pull: { thought: thoughtId } },
+//           { thoughts: thoughtId },
+//           { $pull: { thoughts: thoughtId } },
 //           { new: true }
 //         ),
 //       ]); 
@@ -124,7 +114,7 @@ const thoughtController = {
 
   async addReaction(req, res) {
     try {
-      const dbThoughtData = await Thought.findByIdAndUpdate(
+      const dbThoughtData = await Thoughts.findByIdAndUpdate(
         req.params.thoughtId,
         { $addToSet: { reactions: req.body } },
         { new: true, runValidators: true }
@@ -142,7 +132,7 @@ const thoughtController = {
 
   async removeReaction(req, res) {
     try {
-      const dbThoughtData = await Thought.findByIdAndUpdate(
+      const dbThoughtData = await Thoughts.findByIdAndUpdate(
         req.params.thoughtId,
         { $pull: { reactions: { reactionId: req.params.reactionId } } },
         { new: true, runValidators: true }

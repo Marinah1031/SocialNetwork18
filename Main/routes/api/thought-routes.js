@@ -4,7 +4,7 @@ const thoughtController = require('../../controllers/thought-control');
 const router = Router();
 
 router
-.get('/', thoughtController.getThought)
+.get('/', thoughtController.getThoughts)
 .get('/:id', thoughtController.getOneThought)
 .post('/', thoughtController.createThought)
 .put('/:id', thoughtController.updateThought)
