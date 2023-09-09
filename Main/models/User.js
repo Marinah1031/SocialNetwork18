@@ -14,10 +14,10 @@ const userSchema = new Schema(
       unique: true,
       match: [/.+@.+\..+/, 'Invalid email format.'],
     },
-    thoughts: [
+    thought: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Thoughts',
+        ref: 'Thought',
       },
     ],
     friends: [
