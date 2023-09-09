@@ -5,19 +5,12 @@ const dateFormat = require('../utils/date-format');
 
 
 const thoughtSchema = new Schema({
-    _id: {
-      type: String,
-      validate: {
-        validator: (value) => ObjectId.isValid(value),
-        message: 'Invalid ObjectId',
-        }
-    },
 
         thoughtText: {
             type: String,
-            required: [true, 'This section cannot be blank'],
+            required:'This section cannot be blank',
             minLength: 1,
-            maxLength: 300
+            maxLength: 280
         },
         createdAt: {
             type: Date,
