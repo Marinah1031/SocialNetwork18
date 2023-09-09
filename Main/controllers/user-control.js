@@ -8,7 +8,7 @@ const handleError = (res, err) => {
 const userController = {
   async getUsers(req, res) {
     try {
-      const dbUserData = await User.find().select('select');
+      const dbUserData = await User.find().select('-__v');
       res.json(dbUserData);
     } catch (err) {
       handleError(res, err);
@@ -18,7 +18,7 @@ const userController = {
   async getOneUser(req, res) {
     try {
       const dbUserData = await User.findById(req.params.userId)
-        .select('select')
+        .select('-__v')
         .populate('friends')
         .populate('thoughts');
 
