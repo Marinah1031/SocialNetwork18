@@ -20,6 +20,7 @@ https://github.com/Marinah1031/SocialNetwork18/assets/125934804/463e3c1c-d5c8-4f
   - [Installation](#installation)
   - [Usage](#usage)
   - [License](#license)
+  - [Sources](#sources)
   - [Questions](#questions)
 
 ## Installation
@@ -43,6 +44,13 @@ https://github.com/Marinah1031/SocialNetwork18/assets/125934804/463e3c1c-d5c8-4f
 ## License
 
 [MIT License](https://choosealicense.com/licenses/mit/)
+
+## Sources
+- Instructor (Jared)
+- Tutor (Trinh Nguyen)
+- Classmates (Jen and Dustin)
+- Mongoose documentations
+- UCI Bootcamp past assignment activities as reference
 
 ## Questions
 
