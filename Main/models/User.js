@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-
+// the user schema is defined using MOngoose's schema contructor and the field defined within the schemas are shown below
 const userSchema = new Schema(
   {
     username: {

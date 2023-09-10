@@ -2,7 +2,7 @@ const { Router } = require('express');
 const userController = require('../../controllers/user-control');
 
 const router = Router();
-
+//route handlers that handles the logic for each specific route
 router
   .route('/')
   .get(userController.getUsers)
