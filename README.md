@@ -32,13 +32,13 @@ https://github.com/Marinah1031/SocialNetwork18/assets/125934804/463e3c1c-d5c8-4f
 
 ## Usage
 
--For both '/users' and '/thoughts', we have 'GET' and 'POST' requests that operate on the root of these models, allowing users to retrieve and create data.
+- For both '/users' and '/thoughts', we have 'GET' and 'POST' requests that operate on the root of these models, allowing users to retrieve and create data.
 
-To interact with individual entities, such as a specific user or thought, we have 'GET', 'PUT', and 'DELETE' requests that include an ID in the route, like '/users/:userId' and '/thoughts/:thoughtId'. This structure enables actions like viewing, updating, and deleting specific user profiles or thoughts.
+- To interact with individual entities, such as a specific user or thought, we have 'GET', 'PUT', and 'DELETE' requests that include an ID in the route, like '/users/:userId' and '/thoughts/:thoughtId'. This structure enables actions like viewing, updating, and deleting specific user profiles or thoughts.
 
-To facilitate connections between users, we've implemented the concept of 'friends lists'. Users can manage their friends list to follow content by sending requests to '/api/users/:userId/friends/:friendId'. This allows users to establish relationships and follow updates from specific friends.
+- To facilitate connections between users, we've implemented the concept of 'friends lists'. Users can manage their friends list to follow content by sending requests to '/api/users/:userId/friends/:friendId'. This allows users to establish relationships and follow updates from specific friends.
 
-Similar to the friends feature, we've also incorporated a system for thoughts and their reactions. Users can interact with thoughts and reactions by utilizing routes like '/api/thoughts/:thoughtId/reactions'. This setup enables users to express their thoughts and reactions to posts within the platform.
+- Similar to the friends feature, we've also incorporated a system for thoughts and their reactions. Users can interact with thoughts and reactions by utilizing routes like '/api/thoughts/:thoughtId/reactions'. This setup enables users to express their thoughts and reactions to posts within the platform.
 
 ## License
 
