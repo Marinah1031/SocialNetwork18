@@ -46,6 +46,4 @@ Similar to the friends feature, we've also incorporated a system for thoughts an
 
 ## Questions
 
-Contact me through the links below
-- Github: [19dbo91](https://github.com/19dbo91)
-- Email: [bonilla.dustin+github@gmail.com](mailto:bonilla.dustin+github@gmail.com)
+For further questions regarding the repository, create an issue or contact me at: marinahtam@gmail.com. You can find more of my work on GitHub here: Marinah1031 (https://github.com/Marinah1031 /).
